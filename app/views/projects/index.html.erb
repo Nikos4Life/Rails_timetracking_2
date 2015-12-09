@@ -1,0 +1,13 @@
+<h1>Welcome to Timetracking tool</h1>
+<h3>Projects</h3>
+
+<ul>
+  <% @projects.each do |project| %>
+    <% if project.description.present? %>
+      <li> <%="#{project.name} - #{project.description}"%> </li>
+    <% else %>
+      <li> <%="#{project.name}"%> </li>
+    <% end %>
+  <% end %>
+
+</ul>
