@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   get '/projects/:id/edit' => 'projects#edit'
   patch 'projects/:id'  => 'projects#update'
   delete 'projects/:id' => 'projects#destroy'
+
+  get 'projects/:project_id/entries' => 'entries#index'
+
 end
