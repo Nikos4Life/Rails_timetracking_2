@@ -5,12 +5,12 @@
   <% @projects.each do |project| %>
     <li> 
     <%="#{project.id}: "%>
+    <%= link_to project.name, project %>
     <% if project.description.present? %>
-      <%= "#{project.name} - #{project.description}"%> </li>
-    <% else %>
-      <%="#{project.id}: {project.name}"%> 
+      <%= " - #{project.description}"%> </li>
     <% end %>
-      <%= link_to("Delete", "/projects/#{project.id}", method: :delete) %>
+    <%= link_to("Entries", project_entries_path(project))%>
+      <%= link_to("Delete", project, method: :delete) %>
     </li>
   <% end %>
 
