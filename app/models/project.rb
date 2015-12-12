@@ -1,6 +1,10 @@
 class Project < ActiveRecord::Base
-  has_many :entries
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :name, length: {maximum: 30 }
+  validates :name, format: {with: /[A-Za-z0-9_ ]*/}
 
+  has_many :entries
   def self.iron_find(id)
     self.where(id: id).first
   end
@@ -19,6 +23,11 @@ class Project < ActiveRecord::Base
   def self.last_created_projects(number)
     limit(number).order(created_at: :desc)
   end
-
+  def total_hours(month, year)
+      date = Time.parse("#{year}-#{month}-01")
+      my_range = (date .. date.end_of_month)
+      filtered_entries = entries.where(date: my_range)
+      filtered_entries.reduce(0){|sum, entry| sum+(entry.hours.to_f+(entry.minutes.to_f/60))}
+  end
 
 end
